@@ -1,5 +1,6 @@
+
 pipeline {
-    agent { 
+    agent {
         node {
             label 'docker-agent-python'
             }
@@ -12,8 +13,8 @@ pipeline {
             steps {
                 echo "Building.."
                 sh '''
-                echo "Running helloworld.py.."
-                python3 helloworld.py
+                cd myapp
+                pip install -r requirements.txt
                 '''
             }
         }
@@ -21,8 +22,11 @@ pipeline {
             steps {
                 echo "Testing.."
                 sh '''
-                echo "Show install Pip module.."
-                pip3 list
+                cd myapp
+                echo "Run 1.."
+                python3 hello.py
+                echo "Run 2.."
+                python3 hello.py --name=Jerry
                 '''
             }
         }
